@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.seanba.super-tiled2unity": "file:C:/Users/irisht3/Downloads/super-tiled2unity.v2.1.1",
     "com.unity.collab-proxy": "2.0.7",
     "com.unity.feature.2d": "2.0.0",
     "com.unity.ide.rider": "3.0.24",
