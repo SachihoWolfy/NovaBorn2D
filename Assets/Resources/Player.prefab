@@ -6435,6 +6435,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeaderInfo
       objectReference: {fileID: 0}
+    - target: {fileID: 6435480864664968822, guid: 9ec4096d68727484493f951820bc497f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1693611647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
