@@ -5632,7 +5632,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5736,7 +5736,7 @@ MonoBehaviour:
   maxAmmo: 100
   curFpAmmo: 0
   maxFpAmmo: 100
-  bulletSpeed: 20
+  bulletSpeed: 10
   shootRate: 0.5
   fpRate: 0.2
   fpTime: 0

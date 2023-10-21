@@ -60,7 +60,7 @@ public class PlayerWeapon : MonoBehaviour
             GameUI.instance.UpdateAmmoText();
             // spawn the bullet
             Debug.Log("Tried Shooting");
-            player.photonView.RPC("SpawnBullet", RpcTarget.All, bulletSpawnPos.transform.position, player.moveables.transform.forward);
+            player.photonView.RPC("SpawnBullet", RpcTarget.All, bulletSpawnPos.transform.position, player.moveables.transform.up);
             SoundController.instance.PlaySound(AS, Shoot);
         }   
 }
@@ -75,7 +75,7 @@ public class PlayerWeapon : MonoBehaviour
             GameUI.instance.UpdateFPAmmo();
             // spawn the bullet
             Debug.Log("Tried Shooting");
-            player.photonView.RPC("SpawnBullet", RpcTarget.All, bulletSpawnPos.transform.position, Camera.main.transform.forward);
+            player.photonView.RPC("SpawnBullet", RpcTarget.All, bulletSpawnPos.transform.position, player.moveables.transform.up);
             if (!AS2.isPlaying && isFiring)
             {
                 AS2.Play(0);
