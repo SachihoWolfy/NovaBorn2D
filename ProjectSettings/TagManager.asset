@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Wall
   - Bullet
+  - EnemyBullet
+  - Pickup
   layers:
   - Default
   - TransparentFX
@@ -52,6 +54,9 @@ TagManager:
     locked: 0
   - name: Entity
     uniqueID: 131832613
+    locked: 0
+  - name: Bullet
+    uniqueID: 407269031
     locked: 0
   - name: UI
     uniqueID: 2601355649

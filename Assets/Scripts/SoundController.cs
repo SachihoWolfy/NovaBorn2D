@@ -9,18 +9,25 @@ public class SoundController : MonoBehaviourPun
     //This Experimental Class focuses on having different ways to play audioClips,
     //mainly to also have sound be played to everyone as well.
     public static SoundController instance;
+    public AudioSource audioRPC;
     void Awake()
     {
         instance = this;
     }
     [PunRPC]
-    private void PlaySoundRPC(AudioSource AS, AudioClip clip)
+    private void PlaySoundRPC(Vector3 audioTrasform, string clipName)
     {
-        AS.PlayOneShot(clip);
+        AudioClip clipHolder = AudioClipGetter.instance.GetClip(clipName);
+        audioRPC.transform.position = audioTrasform;
+        audioRPC.spatialBlend = 1;
+        audioRPC.minDistance = 25;
+        audioRPC.maxDistance = 100;
+        audioRPC.PlayOneShot(clipHolder);
+        Debug.Log("Played AudioClip over RPC successfully: " + clipName);
     }
     public void PlaySound(AudioSource AS, AudioClip clip)
     {
         AS.PlayOneShot(clip);
-        //photonView.RPC("PlaySoundRPC", RpcTarget.Others, AS, clip);
+        photonView.RPC("PlaySoundRPC", RpcTarget.Others, AS.transform.position, clip.name);
     }
 }

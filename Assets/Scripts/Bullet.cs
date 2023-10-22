@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     private int damage;
     private int attackerId;
     private bool isMine;
+    private bool isEnemy;
     public Rigidbody2D rig;
     private Vector3 oldPosition;
 
@@ -32,15 +33,10 @@ public class Bullet : MonoBehaviour
         {
             // Handle the collision
             Debug.Log("Hit: " + hit.collider.name);
-            if (hit.collider.gameObject.tag == "Enemy" && isMine)
+            if (hit.collider.gameObject.tag == "Enemy")
             {
-                //Implement New Hit Function To deal with enemys once they are made.
-
-                /*PlayerController player = GameManager.instance.GetPlayer(hit.collider.gameObject);
-                if (player.id != attackerId)
-                {
-                    player.photonView.RPC("TakeDamage", player.photonPlayer, attackerId, damage);
-                }*/
+                Enemy enemy = hit.collider.GetComponent<Enemy>();
+                enemy.photonView.RPC("TakeDamage", Photon.Pun.RpcTarget.MasterClient, damage);
             }
             if (hit.collider.gameObject.tag != "Bullet" && hit.collider.gameObject.tag != "Player" && hit.collider.gameObject.tag != null)
                 Destroy(gameObject);

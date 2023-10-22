@@ -602,7 +602,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &3054085276207124158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,6 +647,10 @@ MonoBehaviour:
   nameText: {fileID: 7141001408199245351}
   healthBar: {fileID: 7980474873129914555}
   shieldBar: {fileID: 2911616563809706628}
+  EnemyColor:
+    serializedVersion: 2
+    rgba: 31231
+  EnemyGradient: {fileID: 11400000, guid: 69a525efa7e6472eab268f6ea605f06e, type: 2}
 --- !u!1 &6010705059469061457
 GameObject:
   m_ObjectHideFlags: 0

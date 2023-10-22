@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviourPun
     public SpriteRenderer sr;
     public Animator weaponAnim;
     public GameObject moveables;
+    public GameObject gun;
     public PlayerWeapon weapon;
     public HeaderInfo headerInfo;
 
@@ -63,10 +64,9 @@ public class PlayerController : MonoBehaviourPun
         if (!photonView.IsMine)
             return;
         Move();
-        //Aim at mouse Please
-        Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        moveables.transform.rotation = Quaternion.AngleAxis(angle + 270, Vector3.forward);
+        //Aim at mouse, movables before the gun, for aiming accuracy.
+        AimAtMouse(moveables);
+        AimAtMouse(gun);
         //Temporary Attack
         if (Input.GetMouseButtonDown(0) && Time.time - lastAttackTime > attackRate)
             Attack();
@@ -95,6 +95,17 @@ public class PlayerController : MonoBehaviourPun
             Debug.Log("Shield regen unable to at the moment. " + (Time.time - lastShieldTime < shieldRate));
         }
     }
+
+    // Should Aim Given Game Object on player to the mouse. 
+    // I Use it twice, once to make the whole player look (Which is an illusion, it's just the "Movables"
+    // and another time to make the gun aim at the mouse, for accuracy.
+    // "hands" is just a placeholder name... and the only name I could think of.
+    void AimAtMouse(GameObject hands)
+    {
+        Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(hands.transform.position);
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        hands.transform.rotation = Quaternion.AngleAxis(angle + 270, Vector3.forward);
+    }
     void Move()
     {
         // get the horizontal and vertical inputs
@@ -103,7 +114,8 @@ public class PlayerController : MonoBehaviourPun
         // apply that to our velocity
         rig.velocity = new Vector2(x, y) * moveSpeed;
     }
-    // melee attacks towards the mouse
+    // melee attacks towards the mouse (!BACKUP INCASE THINGS DON'T WORK!)
+    // !!! TURN OFF WHEN SHOOT ATTACK IS FULLY IMPLEMENTED !!! //
     void Attack()
     {
         lastAttackTime = Time.time;
@@ -115,6 +127,8 @@ public class PlayerController : MonoBehaviourPun
         if (hit.collider != null && hit.collider.gameObject.CompareTag("Enemy"))
         {
             // get the enemy and damage them
+            Enemy enemy = hit.collider.GetComponent<Enemy>();
+            enemy.photonView.RPC("TakeDamage", RpcTarget.MasterClient, damage);
         }
         // play attack animation
         weaponAnim.SetTrigger("Attack");
@@ -171,6 +185,8 @@ public class PlayerController : MonoBehaviourPun
         curHp = maxHp;
         rig.isKinematic = false;
         // update the health bar
+        headerInfo.photonView.RPC("UpdateHealthBar", RpcTarget.All, curHp);
+        headerInfo.photonView.RPC("UpdateShieldBar", RpcTarget.All, curShield);
     }
     [PunRPC]
     public void Initialize(Player player)
