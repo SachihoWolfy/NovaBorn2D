@@ -44,7 +44,7 @@ public class GameUI : MonoBehaviour
     }
     public void UpdatePlayerInfoText()
     {
-        playerInfoText.text = "\n<b>Kills:</b> " + player.kills;
+        playerInfoText.text = "\n<b>Kills:</b> " + player.kills + "\n<b>Shards:</b> " + player.gold;
     }
     public void UpdateAmmoText()
     {

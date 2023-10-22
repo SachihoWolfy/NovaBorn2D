@@ -21,9 +21,13 @@ public class HeaderInfo : MonoBehaviourPun
         shieldBar.value = 0;
     }
     [PunRPC]
-    void UpdateHealthBar(int curHP, int curSP)
+    public void UpdateHealthBar(int curHP)
     {
-        healthBar.value = (float)curHP / maxValue;
-        shieldBar.value = (float)curSP / maxValue;
+        healthBar.value = curHP;
+    }
+    [PunRPC]
+    public void UpdateShieldBar(int curSP)
+    {
+        shieldBar.value = curSP;
     }
 }

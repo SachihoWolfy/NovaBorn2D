@@ -137,10 +137,6 @@ public class PlayerController : MonoBehaviourPun
         {
             SoundController.instance.PlaySound(AS, shieldHurt);
             curShield = Mathf.Clamp(curShield - damage, 0, curShield);
-            if (curShield < 1)
-            {
-                photonView.RPC("DeactivateShield", RpcTarget.All);
-            }
         }
         else
         {
@@ -153,7 +149,8 @@ public class PlayerController : MonoBehaviourPun
         GameUI.instance.UpdateHealthBar();
         GameUI.instance.UpdateShieldBar();
         // update the health bar
-        headerInfo.photonView.RPC("UpdateHealthBar", RpcTarget.All, curHp, curShield);
+        headerInfo.photonView.RPC("UpdateHealthBar", RpcTarget.All, curHp);
+        headerInfo.photonView.RPC("UpdateShieldBar", RpcTarget.All, curShield);
         // die if no health left
         if (curHp <= 0)
             photonView.RPC("Die", RpcTarget.All);
@@ -197,6 +194,7 @@ public class PlayerController : MonoBehaviourPun
     {
         gold += goldToGive;
         // update the ui
+        GameUI.instance.UpdatePlayerInfoText();
     }
     public void AddKill()
     {
@@ -210,7 +208,8 @@ public class PlayerController : MonoBehaviourPun
         SoundController.instance.PlaySound(AS, heal);
         // update the health bar UI
         GameUI.instance.UpdateHealthBar();
-        headerInfo.photonView.RPC("UpdateHealthBar", RpcTarget.All, curHp, curShield);
+        headerInfo.photonView.RPC("UpdateHealthBar", RpcTarget.All, curHp);
+        headerInfo.photonView.RPC("UpdateShieldBar", RpcTarget.All, curShield);
     }
     [PunRPC]
     public void Shield(int amountToShield)
@@ -219,7 +218,7 @@ public class PlayerController : MonoBehaviourPun
         lastShieldTime = Time.time;
         SoundController.instance.PlaySound(AS, shieldGet);
         GameUI.instance.UpdateShieldBar();
-        headerInfo.photonView.RPC("UpdateHealthBar", RpcTarget.All, curHp, curShield);
-        photonView.RPC("ActivateShield", RpcTarget.All);
+        headerInfo.photonView.RPC("UpdateHealthBar", RpcTarget.All, curHp);
+        headerInfo.photonView.RPC("UpdateShieldBar", RpcTarget.All, curShield);
     }
 }
