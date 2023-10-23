@@ -5684,7 +5684,7 @@ MonoBehaviour:
   dead: 0
   curShield: 0
   maxShield: 100
-  shieldRate: 0
+  shieldRate: 5
   kills: 0
   damage: 10
   attackRange: 100
@@ -5772,6 +5772,7 @@ MonoBehaviour:
   AS2: {fileID: 6684180335422671643}
   Shoot: {fileID: 8300000, guid: a683b9e7b0a7006459d5ce5cb714823c, type: 3}
   fpShoot: {fileID: 8300000, guid: a1e1110730879e542b5ea691442489cb, type: 3}
+  fpShootMP: {fileID: 8300000, guid: b16a57a055c6bdd49acca76cd36b5548, type: 3}
   Fail: {fileID: 8300000, guid: 33f61063fa1a0cf448e23418ce141265, type: 3}
   PowerGet: {fileID: 8300000, guid: 79077692c5b61c244ba6e9835615011f, type: 3}
 --- !u!1 &6007456119777579657

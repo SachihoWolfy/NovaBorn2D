@@ -28,6 +28,7 @@ public class PlayerWeapon : MonoBehaviour
     public AudioSource AS2;
     public AudioClip Shoot;
     public AudioClip fpShoot;
+    public AudioClip fpShootMP;
     public AudioClip Fail;
     public AudioClip PowerGet;
     
@@ -36,6 +37,13 @@ public class PlayerWeapon : MonoBehaviour
     {
         // get required components
         player = GetComponent<PlayerController>();
+    }
+    private void Update()
+    {
+        if (!isFiring)
+        {
+            AS2.Stop();
+        }
     }
     public void TryShoot()
     {
@@ -79,6 +87,7 @@ public class PlayerWeapon : MonoBehaviour
             if (!AS2.isPlaying && isFiring)
             {
                 AS2.Play(0);
+                SoundController.instance.PlaySound(AS, fpShootMP);
                 isFiring = true;
 
             }

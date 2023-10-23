@@ -635,20 +635,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: STANDARD
-  moveSpeed: 3
+  moveSpeed: 4
   curHp: 20
   maxHp: 20
   chaseRange: 10
-  attackRange: 0.5
+  attackRange: 5
+  bulletSpeed: 20
   playerDetectRate: 0.2
-  objectToSpawnOnDeath: 
-  damage: 0
-  attackRate: 0
+  objectToSpawnOnDeath: HealthPickup
+  damage: 20
+  attackRate: 1
   healthBar: {fileID: 6967673464010504407}
   sr: {fileID: 1274578234272352746}
   rig: {fileID: 8823385523226160074}
   moveables: {fileID: 5202725822550825785}
   gun: {fileID: 5823534716318603676}
+  bulletPrefab: {fileID: 149741595056262321, guid: f4614140a1d836e40a446fcf1149b925, type: 3}
+  bulletSpawnPos: {fileID: 4719804390715187854}
 --- !u!114 &5953348436690531984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -781,7 +784,7 @@ Transform:
   m_GameObject: {fileID: 5823534716318603676}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.476, y: 0.069, z: 0}
+  m_LocalPosition: {x: 0.3, y: 0.144, z: 0}
   m_LocalScale: {x: 0.3, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -27,7 +27,7 @@ public class SoundController : MonoBehaviourPun
     }
     public void PlaySound(AudioSource AS, AudioClip clip)
     {
-        AS.PlayOneShot(clip);
+        //AS.PlayOneShot(clip);
         photonView.RPC("PlaySoundRPC", RpcTarget.All, AS.transform.position, clip.name);
     }
 }

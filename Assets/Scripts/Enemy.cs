@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviourPun
     public GameObject moveables;
     public GameObject gun;
     public GameObject bulletPrefab;
+    public Transform bulletSpawnPos;
 
     // Start is called before the first frame update
     void Start()
@@ -77,7 +78,8 @@ public class Enemy : MonoBehaviourPun
     void Attack()
     {
         lastAttackTime = Time.time;
-        targetPlayer.photonView.RPC("TakeDamage", targetPlayer.photonPlayer, damage);
+        //targetPlayer.photonView.RPC("TakeDamage", targetPlayer.photonPlayer, damage);
+        photonView.RPC("SpawnEnemyBullet", RpcTarget.All, bulletSpawnPos.transform.position, moveables.transform.up);
     }
     [PunRPC]
     void SpawnEnemyBullet(Vector3 pos, Vector3 dir)
