@@ -642,7 +642,7 @@ MonoBehaviour:
   attackRange: 5
   bulletSpeed: 20
   playerDetectRate: 0.2
-  objectToSpawnOnDeath: HealthPickup
+  objectToSpawnOnDeath: ShardPickup
   damage: 20
   attackRate: 1
   healthBar: {fileID: 6967673464010504407}
