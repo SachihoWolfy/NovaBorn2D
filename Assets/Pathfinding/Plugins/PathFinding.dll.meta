@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: 21532754d129b4885a30c5276267f3e2
+PluginImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  iconMap: {}
+  executionOrder: {}
+  defineConstraints: []
+  isPreloaded: 0
+  isOverridable: 0
+  isExplicitlyReferenced: 0
+  validateReferences: 1
+  platformData:
+  - first:
+      Any: 
+    second:
+      enabled: 1
+      settings: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 17809
+  packageName: Pathfinding
+  packageVersion: 1.3.1
+  assetPath: Assets/Pathfinding/Plugins/PathFinding.dll
+  uploadId: 47134

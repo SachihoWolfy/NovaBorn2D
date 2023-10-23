@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d8bef14429d6442548ce20dd64078532
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 17809
+  packageName: Pathfinding
+  packageVersion: 1.3.1
+  assetPath: Assets/Pathfinding/Sample/Seeker.cs
+  uploadId: 47134
