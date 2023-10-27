@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7575649841068212986}
   m_Layer: 12
   m_Name: PowerPickup
-  m_TagString: Untagged
+  m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 8602543225468629661}
   m_Layer: 12
   m_Name: ShieldCube
-  m_TagString: Untagged
+  m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

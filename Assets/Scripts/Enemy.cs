@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using UnityEngine.UIElements;
+
 public class Enemy : MonoBehaviourPun
 {
     [Header("Info")]
@@ -20,6 +22,7 @@ public class Enemy : MonoBehaviourPun
     [Header("Attack")]
     public int damage;
     public float attackRate;
+    public float shootRange;
     private float lastAttackTime;
     [Header("Components")]
     public HeaderInfo healthBar;
@@ -29,6 +32,11 @@ public class Enemy : MonoBehaviourPun
     public GameObject gun;
     public GameObject bulletPrefab;
     public Transform bulletSpawnPos;
+    [Header("Sounds")]
+    public AudioClip hurt;
+    public AudioClip death;
+    public AudioClip fire;
+    public AudioSource AS;
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +59,7 @@ public class Enemy : MonoBehaviourPun
             // Aim at player (With gun)
             AimAtPlayer(gun);
             // if we're able to attack, do so
-            if (dist < attackRange && Time.time - lastAttackTime >= attackRange)
+            if (dist < shootRange && Time.time - lastAttackTime >= attackRate)
                 Attack();
             // otherwise, do we move after the player?
             else if (dist > attackRange)
@@ -79,7 +87,8 @@ public class Enemy : MonoBehaviourPun
     {
         lastAttackTime = Time.time;
         //targetPlayer.photonView.RPC("TakeDamage", targetPlayer.photonPlayer, damage);
-        photonView.RPC("SpawnEnemyBullet", RpcTarget.All, bulletSpawnPos.transform.position, moveables.transform.up);
+        SoundController.instance.PlaySound(AS,fire);
+        photonView.RPC("SpawnEnemyBullet", RpcTarget.All, bulletSpawnPos.transform.position, gun.transform.up);
     }
     [PunRPC]
     void SpawnEnemyBullet(Vector3 pos, Vector3 dir)
@@ -128,6 +137,7 @@ public class Enemy : MonoBehaviourPun
         else
         {
             photonView.RPC("FlashDamage", RpcTarget.All);
+            SoundController.instance.PlaySound(AS, hurt);
         }
     }
     [PunRPC]
@@ -143,9 +153,27 @@ public class Enemy : MonoBehaviourPun
     }
     void Die()
     {
+        int rand = Random.Range(1, 11);
+        if(rand == 10)
+        {
+            objectToSpawnOnDeath = "PowerPickup";
+        }
+        else if (rand == 9)
+        {
+            objectToSpawnOnDeath = "HealthPickup";
+        }
+        else if (rand == 8)
+        {
+            objectToSpawnOnDeath = "ShieldPickup";
+        }
+        else
+        {
+            objectToSpawnOnDeath = "ShardPickup";
+        }
         if (objectToSpawnOnDeath != string.Empty)
             PhotonNetwork.Instantiate(objectToSpawnOnDeath, transform.position, Quaternion.identity);
         // destroy the object across the network
+        SoundController.instance.PlaySound(AS, death);
         PhotonNetwork.Destroy(gameObject);
     }
 

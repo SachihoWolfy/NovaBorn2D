@@ -33,7 +33,7 @@ public class EnemyBullet : MonoBehaviour
                 PlayerController player = hit.collider.GetComponent<PlayerController>();
                 player.photonView.RPC("TakeDamage", player.photonPlayer, damage);
             }
-            if (hit.collider.gameObject.tag != "Bullet" && hit.collider.gameObject.tag != "Enemy" && hit.collider.gameObject.tag != null)
+            if (hit.collider.gameObject.tag != "Bullet" && hit.collider.gameObject.tag != "Enemy" && hit.collider.gameObject.tag != null && hit.collider.tag != "Pickup")
                 Destroy(gameObject);
         }
     }

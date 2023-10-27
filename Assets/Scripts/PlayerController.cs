@@ -89,10 +89,11 @@ public class PlayerController : MonoBehaviourPun
             lastShieldTime = Time.time;
             curShield = Mathf.Clamp(curShield + 20, 0, maxShield);
             GameUI.instance.UpdateShieldBar();
+            headerInfo.photonView.RPC("UpdateShieldBar", RpcTarget.All, curShield);
         }
         else
         {
-            Debug.Log("Shield regen unable to at the moment. " + (Time.time - lastShieldTime < shieldRate));
+            Debug.Log("Shield regen unable to at the moment. Shield time status: " + (Time.time - lastShieldTime < shieldRate));
         }
     }
 
@@ -120,7 +121,7 @@ public class PlayerController : MonoBehaviourPun
     {
         lastAttackTime = Time.time;
         // calculate the direction
-        Vector3 dir = (Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position)).normalized;
+        /*Vector3 dir = (Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position)).normalized;
         // shoot a raycast in the direction
         RaycastHit2D hit = Physics2D.Raycast(transform.position + dir, dir, attackRange);
         // did we hit an enemy?
@@ -130,6 +131,7 @@ public class PlayerController : MonoBehaviourPun
             Enemy enemy = hit.collider.GetComponent<Enemy>();
             enemy.photonView.RPC("TakeDamage", RpcTarget.MasterClient, damage);
         }
+        */
         // play attack animation
         weaponAnim.SetTrigger("Attack");
     }
@@ -169,6 +171,7 @@ public class PlayerController : MonoBehaviourPun
         if (curHp <= 0)
             photonView.RPC("Die", RpcTarget.All);
     }
+    [PunRPC]
     void Die()
     {
         dead = true;
