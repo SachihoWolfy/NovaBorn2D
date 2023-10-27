@@ -29,51 +29,27 @@ public class Pickup : MonoBehaviourPun
 
             if (type == PickupType.Health)
             {
-                if (player.curHp < player.maxHp)
-                {
-                    Debug.Log("Heal.");
-                    player.photonView.RPC("Heal", player.photonPlayer, value);
-                }
-                else
-                {
-                    Debug.Log("Rejected. Player is FullHP.");
-                    return;
-                }
+                Debug.Log("Heal.");
+                player.photonView.RPC("Heal", player.photonPlayer, value);
             }
             else if (type == PickupType.Ammo)
             {
-                if (player.weapon.curFpAmmo < player.weapon.maxFpAmmo)
-                {
-                    Debug.Log("Ammo.");
-                    player.photonView.RPC("GiveAmmo", player.photonPlayer, value);
-                }
-                else
-                {
-                    Debug.Log("Rejected. Player already has Full FirePower.");
-                    return;
-                }
+                Debug.Log("Ammo.");
+                player.photonView.RPC("GiveAmmo", player.photonPlayer, value);
+
             }
             else if (type == PickupType.Shield)
             {
-                if (player.curShield < 1)
-                {
-                    Debug.Log("Shield.");
-                    player.photonView.RPC("Shield", player.photonPlayer, value);
-                }
-                else
-                {
-                    Debug.Log("Rejected. Player already has shield.");
-                    return;
-                }
+                Debug.Log("Shield.");
+                player.photonView.RPC("Shield", player.photonPlayer, value);
+
             }
             else if (type == PickupType.Gold)
             {
                 Debug.Log("Gold/Shards.");
                 player.photonView.RPC("GiveGold", player.photonPlayer, value);
-                
+
             }
-
-
             // destroy the object
             photonView.RPC("DestroyPickup", RpcTarget.AllBuffered);
         }
